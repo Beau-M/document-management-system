@@ -467,5 +467,5 @@ public interface OKMBundleResources extends ClientBundle {
 	public ImageResource exportCSV();
 
 	@Source("com/openkm/frontend/public/img/icon/actions/options.png")
-	public ImageResource options();
+	public ImageResource options();	
 }

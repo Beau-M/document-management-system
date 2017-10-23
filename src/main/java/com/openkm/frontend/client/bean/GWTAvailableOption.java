@@ -564,4 +564,5 @@ public class GWTAvailableOption implements IsSerializable {
 	public void setMergePdfOption(boolean mergeOption) {
 		this.mergePdfOption = mergeOption;
 	}
+	
 }

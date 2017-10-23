@@ -47,7 +47,8 @@ public class ProfileToolbar implements Serializable {
 	private boolean refreshVisible;
 	private boolean homeVisible;
 	private boolean splitterResizeVisible;
-
+	private boolean omrVisible;
+	
 	public boolean isCreateFolderVisible() {
 		return createFolderVisible;
 	}
@@ -224,6 +225,14 @@ public class ProfileToolbar implements Serializable {
 		this.splitterResizeVisible = splitterResizeVisible;
 	}
 
+	public boolean isOmrVisible() {
+		return omrVisible;
+	}
+
+	public void setOmrVisible(boolean omrVisible) {
+		this.omrVisible = omrVisible;
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

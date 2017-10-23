@@ -237,7 +237,7 @@ public class GWTProfileToolbar implements IsSerializable {
 	public void setSplitterResizeVisible(boolean splitterResizeVisible) {
 		this.splitterResizeVisible = splitterResizeVisible;
 	}
-
+	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

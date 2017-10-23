@@ -30,6 +30,7 @@ public class ProfileMenuTool implements Serializable {
 	private boolean debugVisible;
 	private boolean administrationVisible;
 	private boolean preferencesVisible;
+	private boolean omrVisible;
 	private boolean convertVisible;
 
 	public boolean isLanguagesVisible() {
@@ -70,6 +71,14 @@ public class ProfileMenuTool implements Serializable {
 
 	public void setPreferencesVisible(boolean preferencesVisible) {
 		this.preferencesVisible = preferencesVisible;
+	}
+	
+	public boolean isOmrVisible() {
+		return omrVisible;
+	}
+
+	public void setOmrVisible(boolean omrVisible) {
+		this.omrVisible = omrVisible;
 	}
 
 	public boolean isConvertVisible() {
