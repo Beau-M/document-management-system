@@ -1380,7 +1380,7 @@ public class ToolBar extends Composite implements OriginPanel, HasToolBarEvent, 
 						toolBarOption.addSubscription = true;
 					}
 					
-					if (doc.getMimeType().startsWith("image/")) {
+					if (doc.getMimeType().startsWith("image/png")) {
 						toolBarOption.omrOption = true;
 					}
 				} else {
