@@ -71,6 +71,7 @@ public class ToolBarOption {
 	public boolean mergePdfOption;
 	public boolean findSimilarDocumentOption;
 	public boolean convertOption;
+	public boolean omrOption;
 
 	/**
 	 * ToolBarOption
@@ -119,5 +120,6 @@ public class ToolBarOption {
 		mergePdfOption = false;
 		findSimilarDocumentOption = false;
 		convertOption = false;
+		omrOption = false;
 	}
 }

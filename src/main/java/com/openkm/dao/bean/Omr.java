@@ -1,75 +1,91 @@
 package com.openkm.dao.bean;
 
-import org.hibernate.annotations.Type;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.FieldBridge;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Store;
+
+import com.openkm.module.db.stuff.SetFieldBridge;
+
 
 @Entity
 @Table(name = "OKM_OMR")
 public class Omr implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
-	@Column(name = "OMR_ID")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="OMR_ID")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
-
-	@Column(name = "OMR_TENANT")
-	private long tenant;
-
-	@Column(name = "OMR_NAME", length = 128, unique = true)
+		
+	@Column(name="OMR_NAME", length=128, unique=true)
 	private String name;
-
-	@Column(name = "OMR_TEMPLATE_FILE_CONTENT")
+		
+	@Column(name="OMR_TEMPLATE_FILE_CONTENT")
 	@Lob
 	private byte[] templateFileContent;
-
-	@Column(name = "OMR_ASC_FILE_CONTENT")
-	@Lob
+	
+	@Column(name="OMR_ASC_FILE_CONTENT")
+	@Lob 
 	private byte[] ascFileContent;
-
-	@Column(name = "OMR_CONFIG_FILE_CONTENT")
-	@Lob
+	
+	@Column(name="OMR_CONFIG_FILE_CONTENT")
+	@Lob 
 	private byte[] configFileContent;
-
-	@Column(name = "OMR_FIELDS_FILE_CONTENT")
+	
+	@Column(name="OMR_FIELDS_FILE_CONTENT")
 	@Lob
 	private byte[] fieldsFileContent;
-
-	@Column(name = "OMR_FILE_TEMPLATE_MIME", length = 32)
+	
+	@Column(name="OMR_FILE_TEMPLATE_MIME", length=32)
 	private String templateFileMime;
-
-	@Column(name = "OMR_FILE_ASC_MIME", length = 32)
+	
+	@Column(name="OMR_FILE_ASC_MIME", length=32)
 	private String ascFileMime;
-
-	@Column(name = "OMR_FILE_CONFIG_MIME", length = 32)
+	
+	@Column(name="OMR_FILE_CONFIG_MIME", length=32)
 	private String configFileMime;
-
-	@Column(name = "OMR_FILE_FIELDS_MIME", length = 32)
+	
+	@Column(name="OMR_FILE_FIELDS_MIME", length=32)
 	private String fieldsFileMime;
-
-	@Column(name = "OMR_TEMPLATE_FILENAME", length = 128)
+	
+	@Column(name="OMR_TEMPLATE_FILENAME", length=128)
 	private String templateFileName;
-
-	@Column(name = "OMR_ASC_FILENAME", length = 128)
+	
+	@Column(name="OMR_ASC_FILENAME", length=128)
 	private String ascFileName;
-
-	@Column(name = "OMR_CONFIG_FILENAME", length = 128)
+	
+	@Column(name="OMR_CONFIG_FILENAME", length=128)
 	private String configFileName;
-
-	@Column(name = "OMR_FIELDS_FILENAME", length = 128)
+	
+	@Column(name="OMR_FIELDS_FILENAME", length=128)
 	private String fieldsFileName;
-
+	
 	@ElementCollection
 	@Column(name = "OMP_PROPERTY")
-	@CollectionTable(name = "OKM_OMR_PROPERTY", joinColumns = {@JoinColumn(name = "OMP_OMR")})
+	@CollectionTable(name = "OKM_OMR_PROPERTY", joinColumns = { @JoinColumn(name = "OMP_OMR") })
+	@Field(index = Index.UN_TOKENIZED, store = Store.YES)
+	@FieldBridge(impl = SetFieldBridge.class)
 	protected Set<String> properties = new HashSet<String>();
-
+	
 	@Column(name = "OMR_ACTIVE", nullable = false)
 	@Type(type = "true_false")
-	private Boolean active = Boolean.FALSE;
+	private boolean active;
 
 	public long getId() {
 		return id;
@@ -77,14 +93,6 @@ public class Omr implements Serializable {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public long getTenant() {
-		return tenant;
-	}
-
-	public void setTenant(long tenant) {
-		this.tenant = tenant;
 	}
 
 	public String getName() {
@@ -195,17 +203,14 @@ public class Omr implements Serializable {
 		this.templateFileContent = templateFileContent;
 	}
 
-	public Boolean getActive() {
-		if (active == null) {
-			return false;
-		}
+	public boolean isActive() {
 		return active;
 	}
 
-	public void setActive(Boolean active) {
+	public void setActive(boolean active) {
 		this.active = active;
 	}
-
+	
 	public Set<String> getProperties() {
 		return properties;
 	}
@@ -218,7 +223,6 @@ public class Omr implements Serializable {
 		StringBuilder sb = new StringBuilder();
 		sb.append("{");
 		sb.append("id=").append(id);
-		sb.append("tenant=").append(tenant);
 		sb.append(", name=").append(name);
 		sb.append(", templateFileName=").append(templateFileName);
 		sb.append(", templateFileMime=").append(templateFileMime);
